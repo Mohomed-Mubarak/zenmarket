@@ -1,5 +1,4 @@
 {
-  "nodeVersion": "20.x",
   "buildCommand": "node build.js",
   "outputDirectory": ".",
   "functions": {
