@@ -1,0 +1,30 @@
+{
+  "name": "zenmarket",
+  "version": "29.0.0",
+  "description": "ZenMarket — Sri Lanka's premium e-commerce platform",
+  "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build": "node build.js",
+    "dev": "npx serve . --cors",
+    "dev:node": "node -e \"require('http').createServer((req,res) => { require('fs').readFile('.' + req.url.replace(/\\?.*/,'') + (req.url.endsWith('/') ? 'index.html' : ''), (e,d) => e ? (res.writeHead(404), res.end('Not found')) : (res.writeHead(200), res.end(d))); }).listen(3000, () => console.log('http://localhost:3000'))\"",
+    "lint": "echo 'No linter configured — add eslint if needed'",
+    "health": "curl -s http://localhost:3000/api/health | node -e \"process.stdin.resume(); let d=''; process.stdin.on('data',c=>d+=c); process.stdin.on('end',()=>console.log(JSON.parse(d)))\""
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "ecommerce",
+    "sri-lanka",
+    "payhere",
+    "supabase",
+    "vercel",
+    "cloudflare"
+  ],
+  "author": "ZenMarket",
+  "license": "UNLICENSED"
+}

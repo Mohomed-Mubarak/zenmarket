@@ -1,0 +1,48 @@
+/* =============================================================================
+   SHOP.CSS — Shop Listing Page Styles
+   -----------------------------------------------------------------------------
+   Purpose : Handles the mobile slide-in filter sidebar and its semi-transparent overlay.
+=============================================================================== */
+
+
+/* ── Mobile Filter Toggle Button ─── Hidden on desktop, shown on mobile ───── */
+.mobile-filter-toggle {
+      display: none;
+    }
+
+    
+/* ── Mobile: Sidebar Drawer ─── Sidebar slides in from the left on mobile ──── */
+@media(max-width:900px) {
+      .shop-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: var(--z-modal);
+        transform: translateX(-100%);
+        transition: transform var(--t-slow);
+        border-radius: 0;
+        width: 280px;
+        overflow-y: auto;
+      }
+
+      .shop-sidebar.open {
+        transform: translateX(0);
+      }
+
+      .mobile-filter-toggle {
+        display: flex;
+      }
+
+      .sidebar-overlay {
+        position: fixed;
+        inset: 0;
+        background: var(--clr-overlay);
+        z-index: calc(var(--z-modal) - 1);
+        display: none;
+      }
+
+      .sidebar-overlay.open {
+        display: block;
+      }
+    }

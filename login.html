@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- font-preload-patched -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap"></noscript>
+<script src="js/theme-init.js"></script>
+<!-- zm-critical-loader-css -->
+  <!-- CRITICAL: Inline loader CSS — prevents black-screen if external CSS is slow -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Login — ZenMarket</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0d0f14">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous"></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="css/loader.css">
+  <link rel="stylesheet" href="css/pages/login.css">
+</head>
+<body>
+  <div id="page-loader"><div class="loader-logo">ZenMarket</div><div class="loader-dots"><span></span><span></span><span></span></div></div>
+  <div id="page-progress"></div>
+  <div id="toast-container"></div>
+
+  <div class="auth-page">
+    <!-- Visual side -->
+    <div class="auth-visual">
+      <div style="position:relative;z-index:1">
+        <a href="index.html" style="display:block;margin-bottom:3rem">
+          <span style="font-family:var(--ff-display);font-size:1.5rem;color:var(--clr-text)">Zen<span style="color:var(--clr-gold)">Market</span></span>
+        </a>
+        <p class="auth-visual-quote">
+          "Discover the finest<br>
+          products Sri Lanka<br>
+          has to <em>offer.</em>"
+        </p>
+        <p>Premium quality. Authentic products. Delivered with care.</p>
+        <div style="margin-top:3rem;display:flex;gap:2rem">
+          <div>
+            <div style="font-family:var(--ff-mono);font-size:1.5rem;color:var(--clr-gold)">10K+</div>
+            <div style="font-size:.8125rem;color:var(--clr-text-3)">Happy Customers</div>
+          </div>
+          <div>
+            <div style="font-family:var(--ff-mono);font-size:1.5rem;color:var(--clr-gold)">500+</div>
+            <div style="font-size:.8125rem;color:var(--clr-text-3)">Products</div>
+          </div>
+          <div>
+            <div style="font-family:var(--ff-mono);font-size:1.5rem;color:var(--clr-gold)">25+</div>
+            <div style="font-size:.8125rem;color:var(--clr-text-3)">Districts</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form side -->
+    <div style="display:flex;align-items:center;justify-content:center;padding:3rem 2rem;overflow-y:auto">
+      <div style="width:100%;max-width:420px">
+        <a href="index.html" class="auth-logo">Zen<span>Market</span></a>
+
+        <!-- Back to home -->
+        <a href="index.html" class="btn btn-ghost btn-sm" style="margin-bottom:1.5rem;display:inline-flex;align-items:center;gap:.4rem;color:var(--clr-text-3);padding-left:0">
+          <i class="fa-solid fa-arrow-left" style="font-size:.75rem"></i> Back to Home
+        </a>
+
+        <!-- Login / Register tabs -->
+        <div class="tabs" style="margin-bottom:2rem">
+          <button class="tab-btn active" id="tab-login-btn">Sign In</button>
+          <button class="tab-btn" id="tab-register-btn">Create Account</button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <div id="form-login">
+          <div class="auth-title">Welcome back</div>
+          <div class="auth-subtitle">Sign in to your ZenMarket account</div>
+
+          <form id="login-form" novalidate>
+            <div class="form-group">
+              <label class="form-label required">Email Address</label>
+              <div class="input-group">
+                <i class="input-icon fa-solid fa-envelope"></i>
+                <input class="form-control" type="email" id="login-email" name="email" required autocomplete="email">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="display:flex;justify-content:space-between">
+                <span class="required">Password</span>
+                <a href="#" style="color:var(--clr-gold);font-size:.8125rem">Forgot password?</a>
+              </label>
+              <div class="input-group">
+                <i class="input-icon fa-solid fa-lock"></i>
+                <input class="form-control" type="password" id="login-password" name="password" required autocomplete="current-password">
+                <button type="button" class="input-action" id="toggle-password">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div id="login-error" style="display:none;background:var(--clr-error-bg);color:var(--clr-error);padding:.75rem 1rem;border-radius:var(--r-md);font-size:.875rem;margin-bottom:1rem">
+              <i class="fa-solid fa-triangle-exclamation"></i> Invalid email or password.
+            </div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg" id="login-btn">
+              <i class="fa-solid fa-lock"></i> Sign In
+            </button>
+          </form>
+
+          <div class="auth-footer">
+            Don't have an account? <a href="#" id="switch-to-register">Create one</a>
+          </div>
+        </div>
+
+        <!-- REGISTER FORM -->
+        <div id="form-register" style="display:none">
+          <div class="auth-title">Create Account</div>
+          <div class="auth-subtitle">Join thousands of happy customers</div>
+
+          <form id="register-form" novalidate>
+            <div class="form-group">
+              <label class="form-label required">Full Name</label>
+              <div class="input-group">
+                <i class="input-icon fa-regular fa-circle-user"></i>
+                <input class="form-control" type="text" id="reg-name" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Email Address</label>
+              <div class="input-group">
+                <i class="input-icon fa-solid fa-envelope"></i>
+                <input class="form-control" type="email" id="reg-email" required autocomplete="email">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number <span style="color:var(--clr-text-3);font-size:.8125rem;font-weight:400">(optional)</span></label>
+              <div class="input-group">
+                <i class="input-icon fa-solid fa-phone"></i>
+                <input class="form-control" type="tel" id="reg-phone" placeholder="+94 XX XXX XXXX" autocomplete="tel">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Password</label>
+              <div class="input-group">
+                <i class="input-icon fa-solid fa-lock"></i>
+                <input class="form-control" type="password" id="reg-password" required minlength="6">
+                <button type="button" class="input-action" id="toggle-reg-password" aria-label="Toggle password visibility">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+              <div class="form-hint">Minimum 6 characters</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Confirm Password</label>
+              <div class="input-group">
+                <i class="input-icon fa-solid fa-lock"></i>
+                <input class="form-control" type="password" id="reg-confirm" required>
+                <button type="button" class="input-action" id="toggle-reg-confirm" aria-label="Toggle password visibility">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div id="reg-error" style="display:none;background:var(--clr-error-bg);color:var(--clr-error);padding:.75rem 1rem;border-radius:var(--r-md);font-size:.875rem;margin-bottom:1rem"></div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg" id="register-btn">
+              Create Account
+            </button>
+          </form>
+
+          <div class="auth-footer">
+            Already have an account? <a href="#" id="switch-to-login">Sign in</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<script type="module" src="js/login-page.js"></script>
+</body>
+</html>
